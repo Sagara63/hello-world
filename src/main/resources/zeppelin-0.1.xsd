@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:zeppelin="uri:oozie:zeppelin-action:0.1" elementFormDefault="qualified"
+           targetNamespace="uri:oozie:zeppelin-action:0.1">
+
+    <xs:complexType name="ZEPPELIN-TYPE">
+        <xs:sequence>
+            <xs:element name="job-tracker" type="xs:string" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="name-node" type="xs:string" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="job-xml" type="xs:string" minOccurs="0"
+                        maxOccurs="unbounded"/>
+            <xs:element name="configuration" type="zeppelin:CONFIGURATION"
+                        minOccurs="0" maxOccurs="1"/>
+            <xs:element name="output_file_path" type="xs:string" minOccurs="1"
+                        maxOccurs="1"/>
+            <xs:element name="file" type="xs:string" minOccurs="0"
+                        maxOccurs="unbounded"/>
+            <xs:element name="archive" type="xs:string" minOccurs="0"
+                        maxOccurs="unbounded"/>
+            <xs:element name="restApi" type="xs:string" minOccurs="0"
+                        maxOccurs="unbounded"/>
+            <xs:element name="code" type="xs:string" minOccurs="0"
+                        maxOccurs="unbounded"/>
+            <xs:element name="livyServer" type="xs:string" minOccurs="0"
+                        maxOccurs="unbounded"/>
+            <xs:element name="livyServerPort" type="xs:string" minOccurs="0"
+                        maxOccurs="unbounded"/>
+            <xs:element name="kind" type="xs:string" minOccurs="0"
+                        maxOccurs="unbounded"/>
+            <xs:element name="proxyUser" type="xs:string" minOccurs="0"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CONFIGURATION">
+        <xs:sequence>
+            <xs:element name="property" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="name" minOccurs="1" maxOccurs="1" type="xs:string"/>
+                        <xs:element name="value" minOccurs="1" maxOccurs="1" type="xs:string"/>
+                        <xs:element name="description" minOccurs="0" maxOccurs="1"
+                                    type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="zeppelin" type="zeppelin:ZEPPELIN-TYPE"/>
+</xs:schema>

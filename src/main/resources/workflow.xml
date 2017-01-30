@@ -1,0 +1,22 @@
+<workflow-app xmlns="uri:oozie:workflow:0.4" name="zeppelin-wf">
+    <start to="zeppelin-node"/>
+    <action name="zeppelin-node">
+        <zeppelin xmlns="uri:oozie:zeppelin-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <output_file_path>${ZEPPELIN_OUTPUT_PATH}</output_file_path>
+            <restApi>${ZEPPELIN_REST_API}</restApi>
+            <code>${code}</code>
+            <livyServer>${livyServer}</livyServer>
+            <livyServerPort>${livyServerPort}</livyServerPort>
+            <kind>${kind}</kind>
+            <proxyUser>${proxyUser}</proxyUser>
+        </zeppelin>
+        <ok to="end"/>
+        <error to="fail"/>
+    </action>
+    <kill name="fail">
+        <message>mysql failed, error message[${wf:errorMessage      (wf:lastErrorNode())}]</message>
+    </kill>
+    <end name="end"/>
+</workflow-app>
